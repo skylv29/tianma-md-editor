@@ -1,0 +1,94 @@
+/* =======================================================
+   1. 全局布局与界面框架 (匹配新版 App.jsx)
+======================================================== */
+body, html, #root { margin: 0; padding: 0; height: 100vh; overflow: hidden; background-color: #f5f5f4; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; }
+
+.app-root { display: flex; flex-direction: column; height: 100%; }
+
+/* 顶部状态栏 */
+.top-bar { height: 48px; background: #f5f5f4; border-bottom: 1px solid #dcdcdc; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+.top-bar-left, .top-bar-center, .top-bar-right { display: flex; align-items: center; gap: 10px; }
+.app-brand { font-weight: 600; color: #185FA5; display: flex; align-items: center; gap: 6px; font-size: 15px; }
+.top-bar-divider { width: 1px; height: 20px; background: #ccc; margin: 0 4px; }
+.file-title { font-size: 13px; color: #444; font-weight: 500; }
+
+/* 按钮样式 */
+.tb-btn { display: flex; align-items: center; gap: 4px; background: transparent; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; color: #555; font-size: 12px; transition: 0.2s; }
+.tb-btn:hover { background: #e5e5e5; color: #111; }
+.btn-export { display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #185FA5; color: #185FA5; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 500; transition: 0.2s; }
+.btn-export:hover { background: #f0f7ff; }
+
+/* 视图切换器 */
+.view-switcher { display: flex; background: #e0e0e0; padding: 3px; border-radius: 6px; margin-left: 10px; }
+.view-switcher button { border: none; background: transparent; padding: 4px 12px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px; color: #666; border-radius: 4px; transition: 0.2s; }
+.view-switcher button.active { background: #fff; color: #185FA5; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-weight: 500; }
+
+/* 主体区域 */
+.main-area { flex: 1; display: flex; overflow: hidden; background: #fff; }
+
+/* 侧边大纲 */
+.outline-panel { width: 220px; background: #fcfcfc; border-right: 1px solid #eaeaea; display: flex; flex-direction: column; }
+.outline-header, .pane-bar { padding: 8px 16px; font-size: 12px; color: #888; background: #fafafa; border-bottom: 1px solid #eaeaea; display: flex; align-items: center; gap: 6px; }
+.outline-scroll { flex: 1; overflow-y: auto; padding: 8px 0; }
+.outline-item { padding: 6px 16px; font-size: 13px; color: #555; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background 0.1s; }
+.outline-item:hover { background: #f0f0f0; color: #185FA5; }
+.ol-h1 { font-weight: bold; color: #222; }
+.ol-h2 { padding-left: 26px; }
+.ol-h3 { padding-left: 36px; color: #777; }
+.ol-h4 { padding-left: 46px; font-size: 12px; color: #999; }
+
+/* 编辑与预览区 */
+.editor-pane, .preview-pane { flex: 1; display: flex; flex-direction: column; min-width: 0; background: #fff; }
+.pane-split { border-right: 1px solid #eaeaea; }
+
+/* 底部状态栏 */
+.status-bar { height: 28px; background: #f5f5f4; border-top: 1px solid #dcdcdc; display: flex; align-items: center; padding: 0 16px; font-size: 12px; color: #777; }
+.status-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; margin-right: 6px; box-shadow: 0 0 4px rgba(16,185,129,0.4); }
+.status-sep { width: 1px; height: 12px; background: #ccc; margin: 0 12px; }
+.status-hints { margin-left: auto; color: #999; }
+
+/* 模态框 (Export / Close) */
+.modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(2px); }
+.modal-box { background: #fff; width: 400px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); overflow: hidden; }
+.modal-header { padding: 14px 20px; background: #f8f9fa; border-bottom: 1px solid #eee; font-weight: 600; display: flex; justify-content: space-between; align-items: center; color: #333; }
+.modal-close { background: none; border: none; cursor: pointer; color: #888; }
+.modal-close:hover { color: #f43f5e; }
+.modal-body { padding: 20px; }
+.modal-label { margin: 0 0 10px 0; font-weight: 500; font-size: 14px; color: #444; }
+.modal-radio { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; cursor: pointer; font-size: 13px; color: #555; }
+.modal-footer { padding: 12px 20px; background: #f8f9fa; border-top: 1px solid #eee; display: flex; justify-content: flex-end; gap: 10px; }
+.btn-ghost { background: transparent; border: 1px solid #ccc; padding: 6px 16px; border-radius: 4px; cursor: pointer; color: #555; font-size: 13px; transition: 0.2s; }
+.btn-ghost:hover { background: #eee; }
+.btn-primary-sm { background: #185FA5; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; color: #fff; font-size: 13px; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+.btn-primary-sm:hover { background: #144e88; }
+
+/* =======================================================
+   2. Obsidian 风格的 HTML 预览排版 (.prose)
+======================================================== */
+.prose { color: #2e3338; text-align: justify; line-height: 1.6; }
+
+/* 公文核心：只缩进顶层段落，并使用仿宋 */
+.prose > p { font-family: "仿宋_GB2312", "仿宋", "FangSong", serif; font-size: 21px; line-height: 1.8; text-indent: 2em; margin: 0 0 14px 0; color: #000; }
+
+/* 公文核心：标题严格遵循国标规范 */
+.prose h1 { font-family: "方正小标宋简体", "华文中宋", "SimSun", serif; font-size: 29px; text-align: center; font-weight: bold; margin-top: 0; margin-bottom: 30px; color: #000; }
+.prose h2 { font-family: "黑体", "SimHei", sans-serif; font-size: 21px; font-weight: normal; margin-top: 24px; margin-bottom: 16px; color: #000; }
+.prose h3 { font-family: "楷体_GB2312", "楷体", "KaiTi", serif; font-size: 21px; font-weight: normal; margin-top: 20px; color: #000; }
+.prose h4 { font-family: "仿宋_GB2312", "仿宋", "FangSong", serif; font-size: 21px; font-weight: bold; margin-top: 16px; color: #000; }
+
+/* Obsidian 特色 Markdown 元素 */
+.prose blockquote { border-left: 4px solid #185FA5; margin: 16px 0; padding: 12px 20px; background-color: #f5f7f9; color: #5c6c75; border-radius: 0 6px 6px 0; }
+.prose blockquote p { font-family: inherit; font-size: 16px; text-indent: 0; margin: 0; }
+.prose code { background-color: #f2f3f5; color: #eb5757; padding: 2px 6px; border-radius: 4px; font-family: "Consolas", monospace; font-size: 0.9em; }
+.prose pre { background-color: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; line-height: 1.45; box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); }
+.prose pre code { background-color: transparent; color: inherit; padding: 0; font-size: 14px; }
+.prose ul, .prose ol { font-family: "仿宋_GB2312", "仿宋", "FangSong", serif; font-size: 21px; line-height: 1.8; padding-left: 2em; margin: 0 0 16px 0; color: #000; }
+.prose li { margin-bottom: 6px; }
+.prose li > p { text-indent: 0; margin: 0; }
+.prose a { color: #185FA5; text-decoration: none; border-bottom: 1px solid transparent; transition: border 0.2s; }
+.prose a:hover { border-bottom: 1px solid #185FA5; }
+.prose strong { font-weight: bold; color: #111; }
+.prose hr { border: none; border-top: 2px dashed #ddd; margin: 24px 0; }
+.prose table { width: 100%; border-collapse: collapse; margin: 20px 0; font-family: "仿宋_GB2312", "仿宋", serif; font-size: 19px; background: #fff; }
+.prose th, .prose td { border: 1px solid #cbd5e1; padding: 10px 14px; text-align: left; }
+.prose th { font-weight: bold; background-color: #f8fafc; color: #333; text-align: center; }
